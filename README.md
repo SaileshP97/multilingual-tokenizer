@@ -1,8 +1,6 @@
-# multilingual-tokenizer
+# Multilingual Tokenizer
 
-# 🧠 Indian Languages Text Corpus Processing Pipeline
-
-This repository provides a complete pipeline to download, clean, merge, and prepare multilingual Indian language datasets from Sangraha and Wikipedia. It also includes tokenizer training and model initialization steps.
+This repository is used to **extend a bilingual tokenizer to a multilingual one** by integrating text corpora from multiple Indian languages. It includes a complete pipeline to download, clean, merge, and prepare datasets from Sangraha and Wikipedia. The pipeline also supports tokenizer training and model initialization for multilingual NLP tasks.
 
 ---
 
