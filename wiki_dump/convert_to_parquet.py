@@ -7,9 +7,30 @@ OUTPUT_DIR = "wiki_parquet"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 for lang in [
-    'hi', 'mr', 'sa', 'ne', 'mai', 'gu', 'bn', 'as', 'mni', 'bpy',
-    'te', 'kn', 'ta', 'ml', 'ur', 'ks', 'sd', 'pa', 'or',
-    'ps', 'my', 'awa', 'gom', 'sat'
+    "hi",
+    "mr",
+    "sa",
+    "ne",
+    "mai",
+    "gu",
+    "bn",
+    "as",
+    "mni",
+    "bpy",
+    "te",
+    "kn",
+    "ta",
+    "ml",
+    "ur",
+    "ks",
+    "sd",
+    "pa",
+    "or",
+    "ps",
+    "my",
+    "awa",
+    "gom",
+    "sat",
 ]:
     input_dir = f"{INPUT_DIR}/{lang}"
     texts, urls = [], []
