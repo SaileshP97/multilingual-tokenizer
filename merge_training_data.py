@@ -53,9 +53,9 @@ lang_ratio = {
     "urd": 0.08,
 }
 
-sangraha_path = "./ai4bharat_sangraha/sangraha_data"
-wiki_dump_path = "./wiki_dump/wiki_parquet"
-final_data_path = "./training_data_parquet"
+sangraha_path = "./Data/ai4bharat_sangraha/sangraha_data"
+wiki_dump_path = "./Data/wiki_dump/wiki_parquet"
+final_data_path = "./Data/training_data_parquet"
 
 os.makedirs(final_data_path, exist_ok=True)
 
@@ -71,34 +71,34 @@ def english_char_percentage(text):
 
 
 if __name__ == "__main__":
-    # First loop: Sangraha + Wiki
-    # for lang in tqdm(['asm', 'ben', 'brx', 'doi', 'gom', 'guj',
-    #                   'kan', 'kas', 'mai', 'mal', 'mar', 'mni',
-    #                   'nep', 'ori', 'pan', 'san', 'sat', 'snd',
-    #                   'tam', 'tel', 'urd']):
+    First loop: Sangraha + Wiki
+    for lang in tqdm(['asm', 'ben', 'brx', 'doi', 'gom', 'guj',
+                      'kan', 'kas', 'mai', 'mal', 'mar', 'mni',
+                      'nep', 'ori', 'pan', 'san', 'sat', 'snd',
+                      'tam', 'tel', 'urd']):
 
-    #     print(f"Processing {lang}...")
-    #     sang_par = pd.read_parquet(f"{sangraha_path}/{lang}.parquet")
+        print(f"Processing {lang}...")
+        sang_par = pd.read_parquet(f"{sangraha_path}/{lang}.parquet")
 
-    #     lines = [sample.text for sample in sang_par.itertuples() if english_char_percentage(sample.text) < 2]
-    #     random.shuffle(lines)
-    #     text_blob = "\n".join(lines)[:2_000_000]  # limit by characters
-    #     limited_lines = text_blob.splitlines()    # break back into lines
+        lines = [sample.text for sample in sang_par.itertuples() if english_char_percentage(sample.text) < 2]
+        random.shuffle(lines)
+        text_blob = "\n".join(lines)[:2_000_000]  # limit by characters
+        limited_lines = text_blob.splitlines()    # break back into lines
 
-    #     df = pd.DataFrame({'text': limited_lines})
-    #     df.to_parquet(f"{final_data_path}/{lang}.parquet", index=False)
+        df = pd.DataFrame({'text': limited_lines})
+        df.to_parquet(f"{final_data_path}/{lang}.parquet", index=False)
 
-    # # Second loop: Wiki-only languages not already processed
-    # for lang in tqdm(['awa', 'bpy', 'my', 'ps']):
-    #     print(f"Processing (wiki only) {lang}...")
-    #     data = pd.read_parquet(f"{wiki_dump_path}/{lang}.parquet")
-    #     lines = [sample.text for sample in data.itertuples() if english_char_percentage(sample.text) < 2]
-    #     random.shuffle(lines)
-    #     text_blob = "\n".join(lines)[:2_000_000]  # limit by characters
-    #     limited_lines = text_blob.splitlines()    # break back into lines
+    # Second loop: Wiki-only languages not already processed
+    for lang in tqdm(['awa', 'bpy', 'my', 'ps']):
+        print(f"Processing (wiki only) {lang}...")
+        data = pd.read_parquet(f"{wiki_dump_path}/{lang}.parquet")
+        lines = [sample.text for sample in data.itertuples() if english_char_percentage(sample.text) < 2]
+        random.shuffle(lines)
+        text_blob = "\n".join(lines)[:2_000_000]  # limit by characters
+        limited_lines = text_blob.splitlines()    # break back into lines
 
-    #     df = pd.DataFrame({'text': limited_lines})
-    #     df.to_parquet(f"{final_data_path}/{lang}.parquet", index=False)
+        df = pd.DataFrame({'text': limited_lines})
+        df.to_parquet(f"{final_data_path}/{lang}.parquet", index=False)
 
     all_dfs = []
     for file in os.listdir(final_data_path):

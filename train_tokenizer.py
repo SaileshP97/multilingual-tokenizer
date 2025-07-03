@@ -21,7 +21,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--file_path",
         type=str,
-        default="./training_data_parquet/all_languages_merged.parquet",
+        default="./Data/training_data_parquet/all_languages_merged.parquet",
         help="File path for training.",
     )
     parser.add_argument(
