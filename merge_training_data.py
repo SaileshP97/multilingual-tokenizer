@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import random
+import tqdm
 
 random.seed(13442)
 
@@ -71,7 +72,7 @@ def english_char_percentage(text):
 
 
 if __name__ == "__main__":
-    First loop: Sangraha + Wiki
+
     for lang in tqdm(['asm', 'ben', 'brx', 'doi', 'gom', 'guj',
                       'kan', 'kas', 'mai', 'mal', 'mar', 'mni',
                       'nep', 'ori', 'pan', 'san', 'sat', 'snd',
