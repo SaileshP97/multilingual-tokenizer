@@ -25,7 +25,7 @@ if __name__ == "__main__":
         help="File path for training.",
     )
     parser.add_argument(
-        "--output_dir", type=str, default="Multiligual_Tokenizer", help="Saving Dir"
+        "--output_dir", type=str, default="Multilingual_Ganga", help="Saving Dir"
     )
     args = parser.parse_args()
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         # vocab
         [token_1, token_2] = merge
 
-        if (len(token_1) > 20) or (len(token_2) > 20):
+        if (len(token_1) > 15) or (len(token_2) > 15):
             continue
 
         token = token_1 + token_2

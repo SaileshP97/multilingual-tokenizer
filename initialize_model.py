@@ -15,6 +15,7 @@ def instantiate_model_by_random(
     source_tokenizer: AutoTokenizer,
     target_tokenizer: AutoTokenizer,
     tie_word_embeddings: bool = False,
+    causal_lm_model: bool = False,
 ) -> tuple[AutoModelForCausalLM, AutoTokenizer]:
     # expand the embeddings
     source_embeddings = source_model.get_input_embeddings().weight.detach().numpy()
@@ -28,7 +29,7 @@ def instantiate_model_by_random(
     )
     target_embeddings[: source_embeddings.shape[0]] = source_embeddings
 
-    if not tie_word_embeddings:
+    if not tie_word_embeddings and causal_lm_model:
         print("You are using the output projection init.")
         source_head_embeddings = (
             source_model.get_output_embeddings().weight.detach().numpy()
@@ -83,11 +84,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "--target_tokenizer",
         type=str,
-        default="./Multiligual_Tokenizer",
+        default="./Multilingual_Ganga",
         help="Target tokenizer",
     )
     parser.add_argument(
-        "--output_dir", type=str, default="./New_Model", help="Saving Dir"
+        "--output_dir", type=str, default="./Multilingual_Ganga", help="Saving Dir"
+    )
+    parser.add_argument(
+        "--causal_lm_model",
+        action="store_true",
+        help="Whether to initialize language head or not.",
     )
     args = parser.parse_args()
 
@@ -99,6 +105,7 @@ if __name__ == "__main__":
         source_model=source_model,
         source_tokenizer=source_tokenizer,
         target_tokenizer=target_tokenizer,
+        causal_lm_model=args.causal_lm_model,
     )
 
     target_tokenizer.save_pretrained(args.output_dir)
